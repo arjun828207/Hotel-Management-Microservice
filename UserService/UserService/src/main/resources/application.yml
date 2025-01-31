@@ -1,0 +1,21 @@
+  server:
+    port: 8081
+
+
+  spring:
+    application:
+      name: UserService
+    jpa:
+      show-sql: true
+      hibernate:
+        ddl-auto: update
+      database-platform: org.hibernate.dialect.H2Dialect
+    datasource:
+      url: jdbc:h2:file:C:\\Users\\H2-Database\\UserMicroservice
+      driverClassName: org.h2.Driver
+      username: user
+      password: password
+    h2:
+      console:
+        enabled: true
+        path: /h2-consoles

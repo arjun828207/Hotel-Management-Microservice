@@ -1,10 +1,13 @@
 package com.lcwd.user.service.controllers;
 
 
+import com.lcwd.user.service.UserService.entities.Rating.Rating;
 import com.lcwd.user.service.UserService.entities.User;
 import com.lcwd.user.service.UserService.services.UserServices;
+import com.lcwd.user.service.external.services.RatingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +19,9 @@ public class UserController {
 
     @Autowired
     private UserServices userService;
+    @Autowired
+    private RatingService ratingService;
+
 
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user)
@@ -28,14 +34,24 @@ public class UserController {
     public ResponseEntity<User> getSingleUser(@PathVariable String userId)
     {
         User user = userService.getUser(userId);
+
         return ResponseEntity.ok(user);
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers()
-    {
+    public ResponseEntity<List<User>> getAllUsers() {
         List<User> allUsers = userService.getAllUsers();
+
         return ResponseEntity.ok(allUsers);
+    }
+
+    @GetMapping("/createrating")
+    public void createRating() {
+
+
+        Rating rating = Rating.builder().rating(10).userId("").hotelId("").feedback("feign client").build();
+        Rating savedRating = ratingService.createRating(rating);
+        System.out.println("created rating: " + savedRating);
 
     }
 

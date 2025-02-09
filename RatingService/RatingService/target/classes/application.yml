@@ -14,8 +14,17 @@ spring:
     url: jdbc:h2:file:C:\\Users\\H2-Database\\RatingMicroservice
     driverClassName: org.h2.Driver
     username: user
-    password: 
+    password:
   h2:
     console:
       enabled: true
       path: /h2-consoles
+  eureka:
+    instance:
+      prefer-ip-address: true
+
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
